@@ -8,13 +8,11 @@
 
     <androidx.gridlayout.widget.GridLayout
         android:id="@+id/mg"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="350dp"
+        android:layout_height="350dp"
         android:layout_marginStart="15dp"
-        android:layout_marginLeft="15dp"
         android:layout_marginTop="60dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
         android:layout_marginBottom="291dp"
         android:background="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -23,4 +21,18 @@
         app:layout_constraintTop_toTopOf="parent">
 
     </androidx.gridlayout.widget.GridLayout>
+
+    <TextView
+        android:id="@+id/score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="176dp"
+        android:layout_marginTop="59dp"
+        android:layout_marginEnd="195dp"
+        android:layout_marginBottom="227dp"
+        android:text="Score:"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mg" />
 </androidx.constraintlayout.widget.ConstraintLayout>

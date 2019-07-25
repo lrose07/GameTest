@@ -4,7 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.gridlayout.widget.GridLayout;
 
@@ -13,15 +14,21 @@ public class MainActivity extends AppCompatActivity {
     private final int BOARD_ROW = 8;
     private final int BOARD_COL = 8;
     private GameButton[][] allButtons;
+    private MainController cont;
+    private TextView score;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        cont = new MainController(this);
+
         GridLayout mainGrid = findViewById(R.id.mg);
         mainGrid.setColumnCount(BOARD_COL);
         mainGrid.setRowCount(BOARD_ROW);
+
+        score = findViewById(R.id.score);
 
         allButtons = new GameButton[BOARD_ROW][BOARD_COL];
 
@@ -29,8 +36,12 @@ public class MainActivity extends AppCompatActivity {
             for(int j = 0; j < BOARD_COL; j++) {
                 allButtons[i][j] = new GameButton(this, i, j);
                 allButtons[i][j].setBackgroundColor(Color.BLUE);
-                allButtons[i][j].setTag((8*i)+(j+1));
-
+                allButtons[i][j].setLayoutParams(new LinearLayout.LayoutParams(
+                        1225 / BOARD_ROW,
+                        1225 / BOARD_COL));
+                // TODO: figure out how to get parent dimensions
+                allButtons[i][j].setTag((BOARD_ROW*i)+(j+1));
+                allButtons[i][j].setBackgroundColor(getButtonColor(cont.getSymbolByLocation(i, j)));
                 allButtons[i][j].setOnClickListener(e -> {
                     System.out.println(e.getTag());
                     GameButton btn = mainGrid.findViewWithTag((e.getTag()));
@@ -43,7 +54,54 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void gameButtonClicked(int x, int y) {
-        System.out.println("clicked");
-        allButtons[x][y].setBackgroundColor(Color.RED);
+        cont.gameButtonClicked(x, y);
+    }
+
+    private int getButtonColor(int x) {
+        int c;
+        switch (x) {
+            case 0:
+                c = Color.RED; // red
+                break;
+            case 1:
+                c = Color.BLUE;
+                break;
+            case 2:
+                c = Color.GREEN;
+                break;
+            case 3:
+                c = Color.MAGENTA;
+                break;
+            case 4:
+                c = Color.BLACK;
+                break;
+            case 5:
+                c = Color.CYAN;
+                break;
+            case 6:
+                c = Color.WHITE;
+                break;
+            default:
+                c = Color.YELLOW;
+
+        }
+
+        return c;
+    }
+
+    void updateForGameEnd() {
+        String temp = "No more matches.\nFinal score: " + cont.getScore();
+        score.setText(temp);
+    }
+
+    void updateView(int[][] grid) {
+        for (int row = 0; row < BOARD_ROW; row++) {
+            for (int col = 0; col < BOARD_COL; col++) {
+                allButtons[row][col].setBackgroundColor(getButtonColor(grid[row][col]));
+            }
+        }
+        String temp = "Score: " + cont.getScore();
+        score.setText(temp);
+        //window.repaint();
     }
 }
