@@ -20,6 +20,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         GridLayout mainGrid = findViewById(R.id.mg);
+        mainGrid.setColumnCount(BOARD_COL);
+        mainGrid.setRowCount(BOARD_ROW);
 
         allButtons = new GameButton[BOARD_ROW][BOARD_COL];
 
@@ -27,19 +29,17 @@ public class MainActivity extends AppCompatActivity {
             for(int j = 0; j < BOARD_COL; j++) {
                 allButtons[i][j] = new GameButton(this, i, j);
                 allButtons[i][j].setBackgroundColor(Color.BLUE);
+                allButtons[i][j].setTag((8*i)+(j+1));
+
                 allButtons[i][j].setOnClickListener(e -> {
-                    System.out.println(e.getId());
-                    // why is the ID -1???
-//                    GameButton btn = (GameButton)findViewById(e.getId());
+                    System.out.println(e.getTag());
+                    GameButton btn = mainGrid.findViewWithTag((e.getTag()));
+                    gameButtonClicked(btn.getXLoc(), btn.getYLoc());
                 });
 
                 mainGrid.addView(allButtons[i][j]);
             }
         }
-    }
-
-    private void gameButtonClicked() {
-        System.out.println("click");
     }
 
     private void gameButtonClicked(int x, int y) {
