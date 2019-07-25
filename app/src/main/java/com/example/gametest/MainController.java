@@ -112,8 +112,4 @@ public class MainController {
         // update view to match new grid
         view.updateView(grid.getGrid());
     }
-
-//    GameGrid getUpdatedGrid(int[][] g) {
-//        return new GameGrid(this);
-//    }
 }
