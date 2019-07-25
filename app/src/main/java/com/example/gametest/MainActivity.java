@@ -3,7 +3,12 @@ package com.example.gametest;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.drawable.ShapeDrawable;
+import android.graphics.drawable.shapes.RectShape;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -16,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private GameButton[][] allButtons;
     private MainController cont;
     private TextView score;
+    private Button reset;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +35,10 @@ public class MainActivity extends AppCompatActivity {
         mainGrid.setRowCount(BOARD_ROW);
 
         score = findViewById(R.id.score);
+        reset = findViewById(R.id.reset);
+        reset.setVisibility(View.INVISIBLE);
+
+        reset.setOnClickListener(e -> resetClicked());
 
         allButtons = new GameButton[BOARD_ROW][BOARD_COL];
 
@@ -36,12 +46,21 @@ public class MainActivity extends AppCompatActivity {
             for(int j = 0; j < BOARD_COL; j++) {
                 allButtons[i][j] = new GameButton(this, i, j);
                 allButtons[i][j].setBackgroundColor(Color.BLUE);
+                allButtons[i][j].setBackgroundColor(getButtonColor(cont.getSymbolByLocation(i, j)));
+//                ShapeDrawable shapedrawable = new ShapeDrawable();
+//                shapedrawable.setShape(new RectShape());
+//                shapedrawable.getPaint().setColor(getButtonColor(cont.getSymbolByLocation(i, j)));
+//                shapedrawable.getPaint().setStyle(Paint.Style.FILL);
+//                shapedrawable.getPaint().setColor(Color.BLACK);
+//                shapedrawable.getPaint().setStrokeWidth(10f);
+//                shapedrawable.getPaint().setStyle(Paint.Style.STROKE);
+//                allButtons[i][j].setBackground(shapedrawable);
                 allButtons[i][j].setLayoutParams(new LinearLayout.LayoutParams(
                         1225 / BOARD_ROW,
                         1225 / BOARD_COL));
                 // TODO: figure out how to get parent dimensions
                 allButtons[i][j].setTag((BOARD_ROW*i)+(j+1));
-                allButtons[i][j].setBackgroundColor(getButtonColor(cont.getSymbolByLocation(i, j)));
+
                 allButtons[i][j].setOnClickListener(e -> {
                     System.out.println(e.getTag());
                     GameButton btn = mainGrid.findViewWithTag((e.getTag()));
@@ -92,6 +111,12 @@ public class MainActivity extends AppCompatActivity {
     void updateForGameEnd() {
         String temp = "No more matches.\nFinal score: " + cont.getScore();
         score.setText(temp);
+        reset.setVisibility(View.VISIBLE);
+    }
+
+    void resetClicked() {
+        cont.resetGame();
+        reset.setVisibility(View.INVISIBLE);
     }
 
     void updateView(int[][] grid) {
