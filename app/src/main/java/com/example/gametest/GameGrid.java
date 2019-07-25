@@ -7,6 +7,9 @@ class GameGrid {
 
     private MainController cont;
 
+    private final int BOARD_ROW = 8;
+    private final int BOARD_COL = 8;
+
     GameGrid(MainController _cont) {
         cont = _cont;
         grid = new int[8][8];
@@ -53,66 +56,24 @@ class GameGrid {
     }
 
     boolean isThereAMatchLeft() {
-        // top lef corner
-        if (grid[0][0] == grid[0][1] || grid[0][0] == grid[1][0]) {
-            return true;
-        }
-        // top right corner
-        if (grid[0][6] == grid[0][5] || grid[0][6] == grid[1][6] || grid[0][6] == grid[0][7]) {
-            return true;
-        }
-        //bottom left corner
-        if (grid[6][0] == grid[5][0] || grid[6][0] == grid[6][1] || grid[6][0] == grid[7][1]) {
-            return true;
-        }
-        //bottom right corner
-        if (grid[7][7] == grid[7][6] || grid[7][7] == grid[6][7]) {
-            return true;
-        }
-        for (int i = 2; i <=4; i+=2) {
-            // top row
-            if (grid[0][i] == grid[0][i-1] || grid[0][i] == grid[0][i+1]
-                    || grid[0][i] == grid[1][i]) {
-                return true;
-            }
-            // bottom row
-            int j = i+1;
-            if (grid[7][j] == grid[7][j-1] || grid[7][j] == grid[7][j+1]
-                    || grid[7][j] == grid[6][j]) {
-                return true;
-            }
-        }
-        for (int j = 3; j <= 5; j+=2) {
-            // left column
-            if (grid[j][0] == grid[j-1][0] || grid[j][0] == grid[j+1][0]
-                    || grid[j][0] == grid[j][1]) {
-                return true;
-            }
-            // right column
-            int k = j+1;
-            if (grid[k][7] == grid[k-1][7] || grid[k][7] == grid[k+1][7]
-                    || grid[k][7] == grid[k][6]) {
-                return true;
-            }
-        }
-        for (int i = 1; i <= 5; i+=2) {
-            for (int j = 1; j <= 5; j+=2) {
-                if (grid[i][j] == grid[i-1][j]
-                        || grid[i][j] == grid[i][j+1]
-                        || grid[i][j] == grid[i+1][j]
-                        || grid[i][j] == grid[i][j-1]) {
-                    return true;
-                }
-                int k = i+1;
-                int l = j+1;
-                if (grid[k][l] == grid[k-1][l]
-                        || grid[k][l] == grid[k][l+1]
-                        || grid[k][l] == grid[k+1][l]
-                        || grid[k][l] == grid[k][l-1]) {
+        // check down
+        for (int row = 0; row < BOARD_ROW - 1; row++) {
+            for (int col = 0; col < BOARD_COL; col++) {
+                if (grid[row][col] == grid[row+1][col]) {
                     return true;
                 }
             }
         }
+
+        // check across
+        for (int row = 0; row < BOARD_ROW; row++) {
+            for (int col = 0; col < BOARD_COL - 1; col++) {
+                if (grid[row][col] == grid[row][col+1]) {
+                    return true;
+                }
+            }
+        }
+
         return false;
     }
 }
