@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 
-public class MainController {
+class MainController {
 
     private GameGrid grid;
     private MainActivity view;
@@ -92,7 +92,6 @@ public class MainController {
     private void noMatches() {
         System.out.println("no matches");
         view.updateForGameEnd();
-        //new NoMatchesView(this);
     }
 
     private void updateScore() {
