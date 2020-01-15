@@ -12,7 +12,7 @@ class GameGrid {
 
     GameGrid(MainController _cont) {
         cont = _cont;
-        grid = new int[8][8];
+        grid = new int[BOARD_ROW][BOARD_COL];
         populateGrid();
     }
 
