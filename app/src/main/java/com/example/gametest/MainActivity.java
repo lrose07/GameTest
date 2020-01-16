@@ -24,8 +24,8 @@ public class MainActivity extends AppCompatActivity {
     private MainController cont;
     private TextView score;
     private Button reset;
-    ArrayList<Score> scores;
-    TextView scoresView;
+    private ArrayList<Score> scores;
+    private TextView scoresView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,6 +124,7 @@ public class MainActivity extends AppCompatActivity {
 
     void displayScores() {
         scoresView = findViewById(R.id.scoresTextView);
+        scoresView.setText(scores.get(0).toString());
     }
 
     void resetClicked() {

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "189477978882",
+    "firebase_url": "https://brickgame-cd713.firebaseio.com",
+    "project_id": "brickgame-cd713",
+    "storage_bucket": "brickgame-cd713.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:189477978882:android:478fb98864cc98290b781b",
+        "android_client_info": {
+          "package_name": "com.example.gametest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "189477978882-fhgkmbt6mreel5hfs7qltjg9o8q8d6sr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBGEBLxzRbkzpRS2B9RuKt5pQAeHFEmeOQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "189477978882-fhgkmbt6mreel5hfs7qltjg9o8q8d6sr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

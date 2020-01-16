@@ -12,7 +12,7 @@ import java.util.Scanner;
 class GameFileWriter {
 
     private BufferedWriter writer;
-    private File file = new File("gameScores.txt");
+//    private File file = new File("gameScores.txt");
 
     private ArrayList<Score> allScores;
 
@@ -43,9 +43,8 @@ class GameFileWriter {
         allScores.add(new Score(name, score));
     }
 
-
     private void writeScores() {
-        file = new File("gameScores.txt");
+        File file = new File("gameScores.txt");
         try {
             writer = new BufferedWriter(new FileWriter(file, true));
             for (Score s : allScores) {
@@ -72,9 +71,11 @@ class GameFileWriter {
 
         allScores.clear();
 
-        for (Score s : arrayScores) {
-            allScores.add(s);
-        }
+//        for (Score s : arrayScores) {
+//            allScores.add(s);
+//        }
+
+        allScores.addAll(Arrays.asList(arrayScores));
     }
 
     ArrayList<Score> getAllScores() {
