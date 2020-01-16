@@ -14,6 +14,8 @@ import android.widget.TextView;
 
 import androidx.gridlayout.widget.GridLayout;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
 
     private final int BOARD_ROW = 8;
@@ -22,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
     private MainController cont;
     private TextView score;
     private Button reset;
+    private ArrayList<Score> scores;
+    private TextView scoresView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,8 +114,17 @@ public class MainActivity extends AppCompatActivity {
 
     void updateForGameEnd() {
         String temp = "No more matches.\nFinal score: " + cont.getScore();
+        String placeholderName = "Computer";
+        GameFileWriter gfw = new GameFileWriter(cont.getScore(), placeholderName);
+        scores = gfw.getAllScores();
+        displayScores();
         score.setText(temp);
         reset.setVisibility(View.VISIBLE);
+    }
+
+    void displayScores() {
+        scoresView = findViewById(R.id.scoresTextView);
+        scoresView.setText(scores.get(0).toString());
     }
 
     void resetClicked() {
@@ -127,6 +140,5 @@ public class MainActivity extends AppCompatActivity {
         }
         String temp = "Score: " + cont.getScore();
         score.setText(temp);
-        //window.repaint();
     }
 }
