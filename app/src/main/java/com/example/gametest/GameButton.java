@@ -8,10 +8,10 @@ class GameButton extends AppCompatButton {
     private int xLoc;
     private int yLoc;
 
-    public GameButton(Context c, int _x, int _y) {
+    public GameButton(Context c, int x, int y) {
         super(c);
-        xLoc = _x;
-        yLoc = _y;
+        xLoc = x;
+        yLoc = y;
     }
 
     int getXLoc() {
