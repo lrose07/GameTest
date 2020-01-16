@@ -39,8 +39,8 @@ class GameFileWriter {
         }
     }
 
-    private void addScore(int _score, String _name) {
-        allScores.add(new Score(_name, _score));
+    private void addScore(int score, String name) {
+        allScores.add(new Score(name, score));
     }
 
 
@@ -66,7 +66,8 @@ class GameFileWriter {
 
     private void organizeScores() {
         Score[] arrayScores = new Score[allScores.size()];
-        System.arraycopy(allScores, 0, arrayScores, 0, allScores.size());
+        Score[] allScoresArray = allScores.toArray(new Score[allScores.size()]);
+        System.arraycopy(allScoresArray, 0, arrayScores, 0, allScores.size());
         Arrays.sort(arrayScores, new CompareScores());
 
         allScores.clear();
